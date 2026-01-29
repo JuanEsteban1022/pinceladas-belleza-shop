@@ -1,0 +1,30 @@
+<section class="page productos">
+  <h2 class="page__title">Productos</h2>
+
+  <p *ngIf="loading">Cargando productos...</p>
+  <p *ngIf="error" class="page__error">{{ error }}</p>
+
+  <p class="page__subtitle" *ngIf="!loading && !error && productos.length === 0">
+    No hay productos para mostrar.
+  </p>
+
+  <div class="productos__grid" *ngIf="!loading && !error && productos.length > 0">
+    <article class="producto-card" *ngFor="let p of productos">
+      <div class="producto-card__image">
+        <img [src]="getImageUrl(p)" [alt]="p.nombre">
+      </div>
+      <h3 class="producto-card__name">{{ p.nombre }}</h3>
+      <p class="producto-card__description">{{ p.descripcion }}</p>
+      <p class="producto-card__price">
+        {{ p.precio | currency:'COP':'symbol':'1.0-0' }}
+      </p>
+      <div class="producto-card__actions">
+        <input type="number" class="producto-card__quantity" [(ngModel)]="p.cantidad" min="1"
+          max="{{ p.cantidadStock || 99 }}" value="1" />
+        <button class="producto-card__button" (click)="addToCart(p)">
+          Añadir al carrito
+        </button>
+      </div>
+    </article>
+  </div>
+</section>

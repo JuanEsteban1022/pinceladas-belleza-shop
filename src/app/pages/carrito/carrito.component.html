@@ -1,0 +1,32 @@
+<section class="page carrito">
+  <h2 class="page__title">Carrito de compra</h2>
+
+  <div *ngIf="cart$ | async as cart">
+    <p *ngIf="cart.length === 0" class="page__subtitle">
+      Tu carrito está vacío.
+    </p>
+
+    <div *ngIf="cart.length > 0">
+      <div class="carrito__items">
+        <article class="carrito-card" *ngFor="let item of cart">
+          <div class="carrito-card__image">
+            <img [src]="getImageUrl(item)" [alt]="item.nombre">
+          </div>
+          <div class="carrito-card__info">
+            <h3 class="carrito-card__name">{{ item.nombre }}</h3>
+            <p class="carrito-card__description">{{ item.descripcion }}</p>
+            <p class="carrito-card__price">
+              {{ item.precio | currency:'COP':'symbol':'1.0-0' }} × {{ item.quantity }}
+            </p>
+          </div>
+          <button class="carrito-card__remove" (click)="remove(item.id)">Eliminar</button>
+        </article>
+      </div>
+
+      <div class="carrito__summary">
+        <p>Total: {{ totalPrice$ | async | currency:'COP':'symbol':'1.0-0' }}</p>
+        <button class="carrito__clear" (click)="clear()">Vaciar carrito</button>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,15 @@
+<header class="header">
+    <div class="header__logo">
+        <img src="assets/logo-pinceladas.png" alt="Pinceladas de Belleza">
+    </div>
+
+    <nav class="header__nav">
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
+        <a routerLink="/productos" routerLinkActive="active">Productos</a>
+        <a routerLink="/carrito" routerLinkActive="active">
+            Carrito
+            <span class="header__cart-badge" *ngIf="totalItems > 0">{{ totalItems }}</span>
+        </a>
+        <a routerLink="/login" routerLinkActive="active">Iniciar sesión</a>
+    </nav>
+</header>

@@ -1,0 +1,40 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 2rem;
+    background-color: #f3c7a5;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    min-height: 80px;
+
+    &__logo img {
+        height: 56px;
+    }
+
+    &__nav a {
+        margin-left: 1.5rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #3a2a24;
+        text-decoration: none;
+
+        &.active {
+            border-bottom: 2px solid #3a2a24;
+        }
+    }
+}
+
+.header__cart-badge {
+    display: inline-block;
+    background-color: #3a2a24;
+    color: #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+}
