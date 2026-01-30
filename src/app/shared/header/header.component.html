@@ -1,6 +1,16 @@
 <header class="header">
     <div class="header__logo">
-        <img src="assets/logo-pinceladas.png" alt="Pinceladas de Belleza">
+        <a routerLink="/" class="header__logo-content">
+            <img src="assets/logo-pinceladas.png" alt="Pinceladas de Belleza" class="logo-redondo">
+            <h1 class="title">Pinceladas de belleza</h1>
+        </a>
+
+        <div class="skin-test-container">
+            <button class="btn-cloud" (click)="openModal()">
+                Descubre tu tipo de piel
+            </button>
+
+        </div>
     </div>
 
     <nav class="header__nav">
@@ -10,6 +20,15 @@
             Carrito
             <span class="header__cart-badge" *ngIf="totalItems > 0">{{ totalItems }}</span>
         </a>
-        <a routerLink="/login" routerLinkActive="active">Iniciar sesión</a>
+        <a routerLink="/nosotros" routerLinkActive="active">Nosotros</a>
     </nav>
 </header>
+
+<p-dialog header="Descubre tu tipo de piel" [(visible)]="isModalOpen" [modal]="true" [dismissableMask]="true"
+    [baseZIndex]="10000" [contentStyle]="{ 
+    'max-height': '70vh',
+    'overflow': 'auto'
+  }" [closable]="true">
+
+    <app-skin-test-form></app-skin-test-form>
+</p-dialog>

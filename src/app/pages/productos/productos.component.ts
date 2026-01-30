@@ -36,28 +36,40 @@ export class ProductosComponent implements OnInit {
 
   getImageUrl(p: Producto): string {
     if (!p.urlDrive) {
-      return 'assets/logo-pinceladas.png';
+      return 'assets/img_no_found.png';
     }
 
-    // Si hay varias URLs separadas por coma, usa la primera
-    const firstUrl = p.urlDrive.split(',')[0].trim();
+    // Usar el mismo método que funcionaba en React
+    let match = p.urlDrive.match(/\/d\/([a-zA-Z0-9_-]+)/);
+    if (!match) match = p.urlDrive.match(/id=([a-zA-Z0-9_-]+)/);
 
-    // Si es un link de Google Drive, lo convertimos a enlace directo
-    if (firstUrl.includes('drive.google.com')) {
-      // Extrae el ID de la forma /d/ID/view o ?id=ID
-      const match =
-        firstUrl.match(/\/d\/([^/]+)/) ||
-        firstUrl.match(/id=([^&]+)/);
-
-      const id = match && match[1];
-      if (id) {
-        return `https://drive.google.com/uc?export=view&id=${id}`;
-      }
-    }
-
-    // En cualquier otro caso, usamos la URL tal cual
-    return firstUrl;
+    return match?.[1] ? `https://lh3.googleusercontent.com/d/${match[1]}` : 'assets/img_no_found.png';
   }
+
+  // getImageUrl(p: Producto): string {
+  //   if (!p.urlDrive) {
+  //     return 'assets/logo-pinceladas.png';
+  //   }
+
+  //   // Si hay varias URLs separadas por coma, usa la primera
+  //   const firstUrl = p.urlDrive.split(',')[0].trim();
+
+  //   // Si es un link de Google Drive, lo convertimos a enlace directo
+  //   if (firstUrl.includes('drive.google.com')) {
+  //     // Extrae el ID de la forma /d/ID/view o ?id=ID
+  //     const match =
+  //       firstUrl.match(/\/d\/([^/]+)/) ||
+  //       firstUrl.match(/id=([^&]+)/);
+
+  //     const id = match && match[1];
+  //     if (id) {
+  //       return `https://drive.google.com/uc?export=view&id=${id}`;
+  //     }
+  //   }
+
+  // En cualquier otro caso, usamos la URL tal cual
+  //   return firstUrl;
+  // }
 
   addToCart(producto: Producto & { cantidad: number }): void {
     for (let i = 0; i < producto.cantidad; i++) {

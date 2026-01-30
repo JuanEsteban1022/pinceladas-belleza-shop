@@ -10,7 +10,7 @@ import { CarritoService } from '../../services/carrito.service';
 export class HeaderComponent implements OnInit, OnDestroy {
   totalItems = 0;
   private sub!: Subscription;
-
+  isModalOpen: boolean = false;
   constructor(private cartService: CarritoService) { }
 
   ngOnInit(): void {
@@ -21,5 +21,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+  }
+
+  openModal(): void {
+    this.isModalOpen = true;
+  }
+
+  closeModal(): void {
+    this.isModalOpen = false;
   }
 }

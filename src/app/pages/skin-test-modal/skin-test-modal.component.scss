@@ -1,0 +1,33 @@
+.skin-test-form {
+    max-width: 800px;
+    margin: auto;
+}
+
+.question-block {
+    margin-bottom: 24px;
+}
+
+.option-label {
+    display: block;
+    margin: 6px 0;
+    cursor: pointer;
+}
+
+.btn-cloud {
+    background: #e57d90;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 24px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-cloud:hover {
+    background: #c86375;
+}
+
+.result-block {
+    text-align: center;
+    padding: 24px;
+}

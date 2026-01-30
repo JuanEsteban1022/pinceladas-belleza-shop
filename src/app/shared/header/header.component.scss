@@ -1,19 +1,15 @@
 .header {
-    display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: 0.75rem 2rem;
-    background-color: #f3c7a5;
+    background-color: #f7d7bd;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     width: 100%;
     min-height: 80px;
-
-    &__logo img {
-        height: 56px;
-    }
+    border-bottom: 1px solid #e57d90;
 
     &__nav a {
         margin-left: 1.5rem;
+        margin-top: 1.5rem;
         font-weight: 500;
         text-transform: uppercase;
         letter-spacing: 0.06em;
@@ -37,4 +33,66 @@
     text-align: center;
     font-size: 0.75rem;
     margin-left: 0.5rem;
+}
+
+.header__logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .title {
+        margin-left: 12px;
+        color: #3a2a24;
+        font-family: 'Great Vibes', cursive;
+        font-size: 2rem;
+    }
+}
+
+$btn-cloud-bg: #3a2a24;
+$btn-cloud-bg-hover: #3a2a24d3;
+$btn-cloud-text: #fff;
+
+.btn-cloud {
+    background: $btn-cloud-bg;
+    color: $btn-cloud-text;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        background: $btn-cloud-bg;
+        border-radius: 50%;
+        z-index: -1;
+    }
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        background: $btn-cloud-bg-hover;
+    }
+}
+
+.logo-redondo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #00000022;
+}
+
+.header__logo-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    text-decoration: none;
 }

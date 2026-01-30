@@ -3,11 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductosComponent } from './pages/productos/productos.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
+import { LoginComponent } from './pages/login/login.component';
+import { NosotrosComponent } from './pages/nosotros/nosotros.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'productos', component: ProductosComponent },
   { path: 'carrito', component: CarritoComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'nosotros', component: NosotrosComponent },
   { path: '**', redirectTo: '' }
 ];
 

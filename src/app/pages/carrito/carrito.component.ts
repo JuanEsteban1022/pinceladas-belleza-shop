@@ -28,19 +28,10 @@ export class CarritoComponent {
       return 'assets/logo-pinceladas.png';
     }
 
-    const firstUrl = item.urlDrive.split(',')[0].trim();
+    // Usar el mismo método que funcionaba en React
+    let match = item.urlDrive.match(/\/d\/([a-zA-Z0-9_-]+)/);
+    if (!match) match = item.urlDrive.match(/id=([a-zA-Z0-9_-]+)/);
 
-    if (firstUrl.includes('drive.google.com')) {
-      const match =
-        firstUrl.match(/\/d\/([^/]+)/) ||
-        firstUrl.match(/id=([^&]+)/);
-
-      const id = match && match[1];
-      if (id) {
-        return `https://drive.google.com/uc?export=view&id=${id}`;
-      }
-    }
-
-    return firstUrl;
+    return match?.[1] ? `https://lh3.googleusercontent.com/d/${match[1]}` : 'assets/logo-pinceladas.png';
   }
 }

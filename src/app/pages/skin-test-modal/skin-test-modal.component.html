@@ -1,0 +1,31 @@
+<div class="skin-test-form">
+    <h2>Test para descubrir tu tipo de piel</h2>
+
+    <!-- FORMULARIO -->
+    <form *ngIf="!result" (ngSubmit)="handleSubmit()">
+        <div *ngFor="let q of questions" class="question-block">
+            <p><strong>{{ q.id }}. {{ q.question }}</strong></p>
+
+            <label *ngFor="let opt of q.options" class="option-label">
+                <input type="radio" [name]="'question-' + q.id" [value]="opt.points"
+                    [checked]="answers[q.id] === opt.points" (change)="handleChange(q.id, opt.points)" required />
+                <span>{{ opt.text }}</span>
+            </label>
+        </div>
+
+        <div style="text-align: center">
+            <button type="submit" class="btn-cloud">
+                Calcular tipo de piel
+            </button>
+        </div>
+    </form>
+
+    <!-- RESULTADO -->
+    <div *ngIf="result" class="result-block">
+        <p>Tu tipo de piel es: <strong>{{ result.type }}</strong></p>
+
+        <button class="btn-cloud" (click)="resetTest()">
+            Reiniciar Test
+        </button>
+    </div>
+</div>
