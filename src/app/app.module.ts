@@ -19,28 +19,36 @@ import { registerLocaleData } from '@angular/common';
 import localeEsCo from '@angular/common/locales/es-CO';
 import { SkinTestFormComponent } from './pages/skin-test-modal/skin-test-modal.component';
 import { DialogModule } from 'primeng/dialog';
+import { CarouselModule } from 'primeng/carousel';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { HeroCarouselComponent } from './pages/hero-carousel-component/hero-carousel.component';
+import { BrandCarouselComponent } from './pages/brand-carousel/brand-carousel.component';
 
 registerLocaleData(localeEsCo);
 @NgModule({
   declarations: [
     AppComponent,
+    CarritoComponent,
     HeaderComponent,
     HomeComponent,
-    ProductosComponent,
-    CarritoComponent,
     LoginComponent,
     NosotrosComponent,
-    SkinTestFormComponent
+    ProductosComponent,
+    SkinTestFormComponent,
+    HeroCarouselComponent,
+    BrandCarouselComponent
   ],
   imports: [
-    BrowserModule,
+    AppRoutingModule,
     BrowserAnimationsModule,
-    DialogModule,
-    RouterModule,
-    HttpClientModule,
-    FormsModule,
+    BrowserModule,
     CommonModule,
-    AppRoutingModule
+    DialogModule,
+    CarouselModule,
+    FormsModule,
+    HttpClientModule,
+    RouterModule,
+    SlickCarouselModule
   ],
   providers: [
     {

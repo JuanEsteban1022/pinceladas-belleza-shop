@@ -11,6 +11,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   totalItems = 0;
   private sub!: Subscription;
   isModalOpen: boolean = false;
+
+  listaDeFotosDeBelleza: string[] = [
+    'https://via.placeholder.com/800x400?text=Foto+1',
+    'https://via.placeholder.com/800x400?text=Foto+2',
+    'https://via.placeholder.com/800x400?text=Foto+3'
+  ];
+
   constructor(private cartService: CarritoService) { }
 
   ngOnInit(): void {

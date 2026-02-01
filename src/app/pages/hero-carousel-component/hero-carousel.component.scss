@@ -1,0 +1,104 @@
+.hero-carousel {
+    .p-carousel {
+        height: 85vh;
+    }
+
+    .carousel-slide {
+        height: 65vh;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        padding-left: 2%;
+        padding-right: 2%;
+        justify-content: space-between;
+
+        .carousel-content {
+            h1 {
+                font-size: 1.8rem;
+                color: #3d312a;
+                margin-bottom: 10px;
+                font-weight: bold;
+            }
+
+            p {
+                color: #d4a373;
+                -webkit-text-stroke: 0.5px #3d312a;
+                letter-spacing: 4px;
+                text-transform: uppercase;
+                font-size: 1.2rem;
+                margin-bottom: 20px;
+                font-weight: bold;
+            }
+
+            .btn-shop {
+                display: inline-block;
+                padding: 0.9rem 2.4rem;
+                border-radius: 999px;
+                border: none;
+                background-color: #3a2a24;
+                color: #fff;
+                font-weight: 600;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                text-decoration: none;
+                transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+
+                &:hover {
+                    background-color: #241813;
+                    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.16);
+                    transform: translateY(-1px);
+                    cursor: pointer;
+                }
+            }
+
+            &__logo {
+                text-align: center;
+
+                img {
+                    max-width: min(270px, 70vw);
+                    border-radius: 50%;
+                    // box-shadow: 0 16px 30px rgba(0, 0, 0, 0.3);
+                    box-shadow:
+                        0 12px 24px rgba(0, 0, 0, 0.18),
+                        0 0 20px rgba(229, 125, 144, 0.35),
+                        0 0 40px rgba(200, 99, 117, 0.25);
+                }
+            }
+
+            &__text {
+                color: #3d312a;
+                text-transform: uppercase;
+                font-size: 0.8rem;
+                line-height: 1.6;
+                margin-bottom: 2rem;
+                max-width: 460px;
+                text-align: center;
+                font-weight: bold;
+                // -webkit-text-stroke: 1px #3d312a;
+            }
+        }
+    }
+}
+
+// Personalizar indicadores de PrimeNG
+::ng-deep .p-carousel-indicators {
+    bottom: 40px;
+
+    .p-carousel-indicator {
+        button {
+            background-color: rgba(61, 49, 42, 0.3);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+
+            &.p-highlight {
+                background-color: #3d312a;
+            }
+        }
+    }
+}
+
+::ng-deep .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
+    background-color: #3d312a !important;
+}

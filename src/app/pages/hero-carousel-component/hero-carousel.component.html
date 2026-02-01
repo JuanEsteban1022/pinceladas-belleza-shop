@@ -1,0 +1,23 @@
+<div class="hero-carousel">
+    <p-carousel [value]="slides" [numVisible]="1" [numScroll]="1" [responsiveOptions]="responsiveOptions"
+        [circular]="true" [autoplayInterval]="7000" [showIndicators]="true" [showNavigators]="false">
+
+        <ng-template let-slide pTemplate="item">
+            <div class="carousel-slide" [style.background-image]="'url(' + slide.img + ')'">
+                <div class="carousel-content" *ngIf="slide.viewInfo">
+                    <h1>{{ slide.title }}</h1>
+                    <p>{{ slide.subtitle }}</p>
+                    <button class="btn-shop" routerLink="/productos">VER PRODUCTOS</button>
+                </div>
+                <div class="carousel-content__logo" *ngIf="slide.viewInfo">
+                    <img src="assets/logo-pinceladas.png" alt="Pinceladas de Belleza">
+                    <p class="carousel-content__text">
+                        Cada pincelada cuenta, cada detalle revela tu esencia. <br>
+                        ¡Brilla con elegancia!
+                    </p>
+                </div>
+            </div>
+        </ng-template>
+
+    </p-carousel>
+</div>

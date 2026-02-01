@@ -13,15 +13,25 @@
         </div>
     </div>
 
-    <nav class="header__nav">
-        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
-        <a routerLink="/productos" routerLinkActive="active">Productos</a>
-        <a routerLink="/carrito" routerLinkActive="active">
-            Carrito
-            <span class="header__cart-badge" *ngIf="totalItems > 0">{{ totalItems }}</span>
-        </a>
-        <a routerLink="/nosotros" routerLinkActive="active">Nosotros</a>
-    </nav>
+    <div class="header__nav-container">
+        <nav class="header__nav">
+            <div class="grid mt-1">
+                <div class="col">
+                    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><i
+                            class="pi pi-home mr-1"></i>Inicio</a>
+                    <a routerLink="/productos" routerLinkActive="active"><i class="pi pi-gift mr-1"></i>Productos</a>
+                </div>
+                <div class="col-end">
+                    <a routerLink="/carrito" routerLinkActive="active">
+                        <i class="pi pi-shopping-cart mr-1"></i>
+                        Carrito
+                        <span class="header__cart-badge" *ngIf="totalItems > 0">{{ totalItems }}</span>
+                    </a>
+                    <a routerLink="/nosotros" routerLinkActive="active"><i class="pi pi-user mr-1"></i>Nosotros</a>
+                </div>
+            </div>
+        </nav>
+    </div>
 </header>
 
 <p-dialog header="Descubre tu tipo de piel" [(visible)]="isModalOpen" [modal]="true" [dismissableMask]="true"
