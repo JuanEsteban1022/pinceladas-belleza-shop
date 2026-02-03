@@ -13,11 +13,12 @@ export interface Producto {
   categoriaId: number;
   proveedorId: number;
   urlDrive?: string;
+  imagenes?: string[];
 }
 
 @Injectable({ providedIn: 'root' })
 export class ProductosService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAll(): Observable<Producto[]> {
     return this.http.get<Producto[]>(`${BASE_URL}/productos`);

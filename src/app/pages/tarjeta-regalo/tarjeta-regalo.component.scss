@@ -1,0 +1,503 @@
+.tarjeta-regalo {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.tarjeta-regalo__container {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.tarjeta-regalo__header {
+    background: linear-gradient(135deg, #3a2a24 0%, #5a4a44 100%);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+
+    .tarjeta-regalo__title {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        i {
+            font-size: 2.5rem;
+        }
+    }
+
+    .tarjeta-regalo__subtitle {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        margin: 0;
+    }
+}
+
+.tarjeta-regalo__form {
+    padding: 3rem 2rem;
+}
+
+.form-section {
+    margin-bottom: 3rem;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.form-section__title {
+    font-size: 1.5rem;
+    color: #3a2a24;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #f0f0f0;
+
+    i {
+        color: #5a4a44;
+    }
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+
+    label {
+        display: block;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+    }
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+
+    &:focus {
+        outline: none;
+        border-color: #3a2a24;
+        box-shadow: 0 0 0 3px rgba(58, 42, 36, 0.1);
+    }
+
+    &.is-invalid {
+        border-color: #d32f2f;
+        background-color: #fff5f5;
+    }
+
+    &::placeholder {
+        color: #999;
+    }
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.invalid-feedback {
+    color: #d32f2f;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.char-count {
+    text-align: right;
+    font-size: 0.875rem;
+    color: #666;
+    margin-top: 0.25rem;
+}
+
+// Sección de montos
+.amount-section {
+    margin-bottom: 2rem;
+}
+
+.amount-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.amount-card {
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: white;
+
+    &:hover {
+        border-color: #5a4a44;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    &.active {
+        border-color: #3a2a24;
+        background: #3a2a24;
+        color: white;
+    }
+
+    .amount-value {
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+}
+
+.custom-amount {
+    max-width: 300px;
+}
+
+// Sección de diseños
+.design-section {
+    margin-top: 2rem;
+}
+
+.design-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.design-card {
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: white;
+
+    &:hover {
+        border-color: #5a4a44;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    &.active {
+        border-color: #3a2a24;
+        background: #3a2a24;
+        color: white;
+    }
+
+    i {
+        font-size: 2rem;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    span {
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
+}
+
+// Opciones de entrega
+.delivery-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-weight: 500;
+
+    input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        accent-color: #3a2a24;
+    }
+}
+
+// Botones de acción
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid #f0f0f0;
+}
+
+.btn {
+    padding: 0.875rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    &.btn-primary {
+        background: #3a2a24;
+        color: white;
+
+        &:hover:not(:disabled) {
+            background: #2a1a14;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(58, 42, 36, 0.3);
+        }
+    }
+
+    &.btn-outline {
+        background: transparent;
+        color: #3a2a24;
+        border: 2px solid #3a2a24;
+
+        &:hover:not(:disabled) {
+            background: #3a2a24;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(58, 42, 36, 0.3);
+        }
+    }
+}
+
+// Modal de vista previa
+.preview-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 2rem;
+}
+
+.preview-content {
+    background: white;
+    border-radius: 16px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.preview-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h3 {
+        margin: 0;
+        color: #3a2a24;
+    }
+
+    .close-btn {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #666;
+        padding: 0.5rem;
+        border-radius: 4px;
+        transition: background 0.3s ease;
+
+        &:hover {
+            background: #f0f0f0;
+        }
+    }
+}
+
+.preview-body {
+    padding: 2rem;
+}
+
+.gift-card-preview {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background: url('/assets/target/tarjeta_frontal.png') no-repeat center center;
+    background-size: cover;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+    .gift-card-content {
+        position: relative;
+        z-index: 2;
+        padding: 2rem;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .field-group {
+        margin-bottom: 1.5rem;
+
+        .field-label {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 0.5rem;
+            font-family: 'Great Vibes', cursive;
+        }
+
+        .field-input {
+            background: rgba(245, 235, 220, 0.95);
+            border-radius: 12px;
+            padding: 0.8rem 1.2rem;
+            color: #5a4a44;
+            font-size: 1rem;
+            font-weight: 500;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+            &.message-field {
+                min-height: 80px;
+                padding: 1rem 1.2rem;
+                align-items: flex-start;
+            }
+        }
+    }
+
+    .gift-card-amount {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        z-index: 3;
+        text-align: center;
+    }
+
+    .redemption-text {
+        position: absolute;
+        bottom: 2rem;
+        left: 0;
+        right: 0;
+        text-align: center;
+        color: #5a4a44;
+        font-size: 0.9rem;
+        font-weight: 600;
+        z-index: 2;
+        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+    }
+
+    .brand-text {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%) rotate(-90deg);
+        transform-origin: center;
+        color: #5a4a44;
+        font-size: 0.8rem;
+        font-weight: 500;
+        z-index: 2;
+        white-space: nowrap;
+        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+    }
+}
+
+@media (max-width: 768px) {
+    .tarjeta-regalo {
+        padding: 1rem;
+    }
+
+    .tarjeta-regalo__header {
+        padding: 2rem 1.5rem;
+
+        .tarjeta-regalo__title {
+            font-size: 2rem;
+        }
+    }
+
+    .tarjeta-regalo__form {
+        padding: 2rem 1.5rem;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .amount-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .design-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .form-actions {
+        flex-direction: column;
+        align-items: stretch;
+
+        .btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    .gift-card-preview {
+        .gift-card-amount {
+            font-size: 2rem;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .amount-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .design-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .preview-modal {
+        padding: 1rem;
+    }
+
+    .preview-content {
+        margin: 1rem;
+    }
+}

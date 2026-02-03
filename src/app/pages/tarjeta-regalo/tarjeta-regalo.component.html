@@ -1,0 +1,195 @@
+<section class="page tarjeta-regalo">
+    <div class="tarjeta-regalo__container">
+        <header class="tarjeta-regalo__header">
+            <h1 class="tarjeta-regalo__title">
+                <i class="pi pi-gift"></i>
+                Tarjeta Regalo
+            </h1>
+            <p class="tarjeta-regalo__subtitle">
+                Regala belleza y elegancia a esa persona especial
+            </p>
+        </header>
+
+        <form [formGroup]="giftCardForm" (ngSubmit)="onSubmit()" class="tarjeta-regalo__form">
+            <!-- Sección: Datos del Remitente -->
+            <div class="form-section">
+                <h2 class="form-section__title">
+                    <i class="pi pi-user"></i>
+                    Datos del Remitente
+                </h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="senderName">Nombre completo *</label>
+                        <input type="text" id="senderName" formControlName="senderName" class="form-control"
+                            [class.is-invalid]="submitted && f['senderName'].errors" />
+                        <div class="invalid-feedback" *ngIf="submitted && f['senderName'].errors">
+                            <span *ngIf="f['senderName'].errors?.['required']">El nombre es requerido</span>
+                            <span *ngIf="f['senderName'].errors?.['minlength']">Mínimo 3 caracteres</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="senderEmail">Correo electrónico *</label>
+                        <input type="email" id="senderEmail" formControlName="senderEmail" class="form-control"
+                            [class.is-invalid]="submitted && f['senderEmail'].errors" />
+                        <div class="invalid-feedback" *ngIf="submitted && f['senderEmail'].errors">
+                            <span *ngIf="f['senderEmail'].errors?.['required']">El email es requerido</span>
+                            <span *ngIf="f['senderEmail'].errors?.['email']">Email inválido</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="senderPhone">Teléfono *</label>
+                        <input type="tel" id="senderPhone" formControlName="senderPhone" class="form-control"
+                            placeholder="3001234567" [class.is-invalid]="submitted && f['senderPhone'].errors" />
+                        <div class="invalid-feedback" *ngIf="submitted && f['senderPhone'].errors">
+                            <span *ngIf="f['senderPhone'].errors?.['required']">El teléfono es requerido</span>
+                            <span *ngIf="f['senderPhone'].errors?.['pattern']">10 dígitos requeridos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Datos del Destinatario -->
+            <div class="form-section">
+                <h2 class="form-section__title">
+                    <i class="pi pi-heart"></i>
+                    Datos del Destinatario
+                </h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="recipientName">Nombre completo *</label>
+                        <input type="text" id="recipientName" formControlName="recipientName" class="form-control"
+                            [class.is-invalid]="submitted && f['recipientName'].errors" />
+                        <div class="invalid-feedback" *ngIf="submitted && f['recipientName'].errors">
+                            <span *ngIf="f['recipientName'].errors?.['required']">El nombre es requerido</span>
+                            <span *ngIf="f['recipientName'].errors?.['minlength']">Mínimo 3 caracteres</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recipientEmail">Correo electrónico *</label>
+                        <input type="email" id="recipientEmail" formControlName="recipientEmail" class="form-control"
+                            [class.is-invalid]="submitted && f['recipientEmail'].errors" />
+                        <div class="invalid-feedback" *ngIf="submitted && f['recipientEmail'].errors">
+                            <span *ngIf="f['recipientEmail'].errors?.['required']">El email es requerido</span>
+                            <span *ngIf="f['recipientEmail'].errors?.['email']">Email inválido</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recipientPhone">Teléfono *</label>
+                        <input type="tel" id="recipientPhone" formControlName="recipientPhone" class="form-control"
+                            placeholder="3001234567" [class.is-invalid]="submitted && f['recipientPhone'].errors" />
+                        <div class="invalid-feedback" *ngIf="submitted && f['recipientPhone'].errors">
+                            <span *ngIf="f['recipientPhone'].errors?.['required']">El teléfono es requerido</span>
+                            <span *ngIf="f['recipientPhone'].errors?.['pattern']">10 dígitos requeridos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Monto y Diseño -->
+            <div class="form-section">
+                <h2 class="form-section__title">
+                    <i class="pi pi-dollar"></i>
+                    Monto y Diseño
+                </h2>
+
+                <!-- Montos predefinidos -->
+                <div class="amount-section">
+                    <label>Selecciona el monto *</label>
+                    <div class="amount-grid">
+                        <div *ngFor="let amount of predefinedAmounts" class="amount-card"
+                            [class.active]="f['amount'].value === amount" (click)="onAmountChange(amount)">
+                            <span class="amount-value">{{ formatCurrency(amount) }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Diseños -->
+                <div class="design-section">
+                    <label>Selecciona el diseño *</label>
+                    <div class="design-grid">
+                        <div *ngFor="let design of designs" class="design-card"
+                            [class.active]="f['design'].value === design.id"
+                            (click)="giftCardForm.patchValue({ design: design.id })">
+                            <i [class]="design.icon"></i>
+                            <span>{{ design.name }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Mensaje y Entrega -->
+            <div class="form-section">
+                <h2 class="form-section__title">
+                    <i class="pi pi-envelope"></i>
+                    Mensaje y Entrega
+                </h2>
+
+                <div class="form-group">
+                    <label for="message">Mensaje personalizado *</label>
+                    <textarea id="message" formControlName="message" class="form-control" rows="4"
+                        placeholder="Escribe un mensaje especial para el destinatario..."
+                        [class.is-invalid]="submitted && f['message'].errors"></textarea>
+                    <div class="char-count">{{ f['message'].value?.length || 0 }}/500</div>
+                    <div class="invalid-feedback" *ngIf="submitted && f['message'].errors">
+                        <span *ngIf="f['message'].errors?.['required']">El mensaje es requerido</span>
+                        <span *ngIf="f['message'].errors?.['maxlength']">Máximo 500 caracteres</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="form-actions">
+                <button type="button" class="btn btn-outline" (click)="togglePreview()"
+                    [disabled]="giftCardForm.invalid">
+                    <i class="pi pi-eye"></i>
+                    Vista Previa
+                </button>
+
+                <button type="submit" class="btn btn-primary" [disabled]="isSubmitting || giftCardForm.invalid">
+                    <i class="pi pi-check" *ngIf="!isSubmitting"></i>
+                    <i class="pi pi-spin pi-spinner" *ngIf="isSubmitting"></i>
+                    {{ isSubmitting ? 'Procesando...' : 'Crear Tarjeta Regalo' }}
+                </button>
+            </div>
+        </form>
+
+        <!-- Vista Previa -->
+        <div class="preview-modal" *ngIf="showPreview" (click)="togglePreview()">
+            <div class="preview-content" (click)="$event.stopPropagation()">
+                <div class="preview-header">
+                    <h3>Vista Previa de la Tarjeta</h3>
+                    <button class="close-btn" (click)="togglePreview()">
+                        <i class="pi pi-times"></i>
+                    </button>
+                </div>
+                <div class="preview-body">
+                    <div class="gift-card-preview">
+                        <div class="gift-card-content">
+                            <div class="field-group">
+                                <label class="field-label">MOTIVO</label>
+                                <div class="field-input">{{ f['recipientName'].value || 'Nombre del destinatario' }}
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label">MENSAJE</label>
+                                <div class="field-input message-field">{{ f['message'].value || 'Tu mensaje especial
+                                    aquí' }}</div>
+                            </div>
+                        </div>
+                        <div class="gift-card-amount">
+                            {{ formatCurrency(f['amount'].value) }}
+                        </div>
+                        <div class="redemption-text">
+                            Redime tu tarjeta de regalo antes del {{ getExpirationDate() }}
+                        </div>
+                        <div class="brand-text">@brushstrokerbyluz</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

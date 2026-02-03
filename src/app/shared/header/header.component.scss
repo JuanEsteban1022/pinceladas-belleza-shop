@@ -1,11 +1,7 @@
 .header {
-    // display: flex;
     align-items: center;
-    // justify-content: space-between;
-    padding: 0.75rem 2rem;
     background-color: white;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    // width: 100%;
     min-height: 80px;
     position: sticky;
     top: 0;
@@ -15,19 +11,145 @@
 
     &__nav {
         width: 100%;
+
+        .grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
+        a {
+            margin-left: 1.5rem;
+            margin-top: 1.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #3a2a24;
+            text-decoration: none;
+
+        }
+
+        // Estilos especiales para Tarjeta Regalo
+        .gift-card-link {
+            position: relative;
+            padding: 0;
+            background: none !important;
+
+            &:hover {
+                background: none !important;
+                transform: translateY(-3px) scale(1.05);
+            }
+
+            .gift-card-wrapper {
+                width: max-content;
+                position: relative;
+                background: linear-gradient(135deg, #e28b9b 0%, #e29ba8 50%, #e28b9b 100%);
+                color: #3a2a24;
+                padding: 0.75rem 1.25rem;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                font-weight: 600;
+                font-size: 0.95rem;
+                box-shadow: 0 4px 15px rgba(228, 145, 160, 0.3);
+                border: 2px solid transparent;
+                background-clip: padding-box;
+                overflow: hidden;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, transparent 50%, rgba(255, 255, 255, 0.1) 100%);
+                    border-radius: 10px;
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                }
+
+                .gift-shine {
+                    position: absolute;
+                    top: -50%;
+                    left: -50%;
+                    width: 200%;
+                    height: 200%;
+                    background: linear-gradient(45deg,
+                            transparent 30%,
+                            rgba(255, 255, 255, 0.5) 50%,
+                            transparent 70%);
+                    transform: rotate(45deg) translateX(-100%);
+                    transition: transform 0.6s ease;
+                    pointer-events: none;
+                }
+
+                i {
+                    font-size: 1.2rem;
+                    animation: giftPulse 2s ease-in-out infinite;
+                }
+
+                .gift-text {
+                    position: relative;
+                    z-index: 2;
+                }
+            }
+
+            &:hover .gift-card-wrapper {
+                box-shadow: 0 8px 25px rgb(228, 145, 160);
+                border-color: rgba(228, 145, 160);
+                transform: translateY(-3px) scale(1.05);
+
+                &::before {
+                    opacity: 1;
+                }
+
+                .gift-shine {
+                    transform: rotate(45deg) translateX(100%);
+                }
+
+                i {
+                    animation: giftBounce 0.6s ease;
+                }
+            }
+
+            &.active .gift-card-wrapper {
+                background: linear-gradient(135deg, #e57d90 0%, #e28b9b 50%, #e57d90 100%);
+                box-shadow: 0 6px 20px rgba(228, 145, 160);
+                border-color: #e28b9b;
+            }
+        }
     }
 
-    &__nav a {
-        margin-left: 1.5rem;
-        margin-top: 1.5rem;
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        color: #3a2a24;
-        text-decoration: none;
+    @keyframes giftPulse {
 
-        &.active {
-            border-bottom: 2px solid #3a2a24;
+        0%,
+        100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.1);
+        }
+    }
+
+    @keyframes giftBounce {
+
+        0%,
+        100% {
+            transform: translateY(0) rotate(0deg);
+        }
+
+        25% {
+            transform: translateY(-3px) rotate(-5deg);
+        }
+
+        75% {
+            transform: translateY(-3px) rotate(5deg);
         }
     }
 }
@@ -48,13 +170,14 @@
 .header__logo {
     display: flex;
     align-items: center;
+    padding: 0 2rem;
     justify-content: space-between;
 
     .title {
         margin-left: 12px;
         color: #3a2a24;
         font-family: 'Great Vibes', cursive;
-        font-size: 2rem;
+        font-size: 3rem;
     }
 }
 

@@ -15,15 +15,25 @@
 
     <div class="header__nav-container">
         <nav class="header__nav">
-            <div class="grid mt-1">
-                <div class="col">
+            <div class="grid ">
+                <div class="col-4 flex justify-content-start align-items-start">
                     <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><i
-                            class="pi pi-home mr-1"></i>Inicio</a>
-                    <a routerLink="/productos" routerLinkActive="active"><i class="pi pi-gift mr-1"></i>Productos</a>
+                            class="fa fa-home mr-1"></i>Inicio</a>
+                    <a routerLink="/productos" routerLinkActive="active"><i
+                            class="fa fa-paint-brush mr-1"></i>Productos</a>
                 </div>
-                <div class="col-end">
+                <div class="col-4 flex justify-content-center">
+                    <a routerLink="/tarjeta-regalo" routerLinkActive="active" class="gift-card-link">
+                        <div class="gift-card-wrapper">
+                            <i class="pi pi-gift"></i>
+                            <span class="gift-text">Tarjeta regalo</span>
+                            <div class="gift-shine"></div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-4 flex justify-content-end">
                     <a routerLink="/carrito" routerLinkActive="active">
-                        <i class="pi pi-shopping-cart mr-1"></i>
+                        <i class="fa fa-shopping-cart mr-1"></i>
                         Carrito
                         <span class="header__cart-badge" *ngIf="totalItems > 0">{{ totalItems }}</span>
                     </a>

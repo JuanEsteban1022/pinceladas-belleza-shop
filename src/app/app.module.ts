@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,33 +20,40 @@ import localeEsCo from '@angular/common/locales/es-CO';
 import { SkinTestFormComponent } from './pages/skin-test-modal/skin-test-modal.component';
 import { DialogModule } from 'primeng/dialog';
 import { CarouselModule } from 'primeng/carousel';
+import { GalleriaModule } from 'primeng/galleria';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { HeroCarouselComponent } from './pages/hero-carousel-component/hero-carousel.component';
 import { BrandCarouselComponent } from './pages/brand-carousel/brand-carousel.component';
+import { ProductoDetalleComponent } from './pages/producto-detalle/producto-detalle.component';
+import { TarjetaRegaloComponent } from './pages/tarjeta-regalo/tarjeta-regalo.component';
 
 registerLocaleData(localeEsCo);
 @NgModule({
   declarations: [
     AppComponent,
+    BrandCarouselComponent,
     CarritoComponent,
     HeaderComponent,
+    HeroCarouselComponent,
     HomeComponent,
     LoginComponent,
     NosotrosComponent,
+    ProductoDetalleComponent,
     ProductosComponent,
     SkinTestFormComponent,
-    HeroCarouselComponent,
-    BrandCarouselComponent
+    TarjetaRegaloComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    CarouselModule,
     CommonModule,
     DialogModule,
-    CarouselModule,
     FormsModule,
+    GalleriaModule,
     HttpClientModule,
+    ReactiveFormsModule,
     RouterModule,
     SlickCarouselModule
   ],

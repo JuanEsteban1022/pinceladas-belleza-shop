@@ -2,9 +2,12 @@
   padding: 2.5rem 6vw;
 
   &__title {
+    margin-top: 0;
     text-align: center;
-    font-size: 2rem;
-    margin-bottom: 0.75rem;
+    margin-left: 12px;
+    color: #3a2a24;
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
   }
 
   &__subtitle {
@@ -39,6 +42,7 @@
     padding-bottom: 0.75rem;
     display: flex;
     justify-content: center;
+    cursor: pointer;
 
     img {
       max-width: 100%;
@@ -52,6 +56,7 @@
     font-size: 1.1rem;
     font-weight: 600;
     margin: 0.25rem 0;
+    cursor: pointer;
   }
 
   &__description {
@@ -59,17 +64,20 @@
     color: #6a5b54;
     margin-bottom: 0.75rem;
     min-height: 40px;
+    cursor: pointer;
   }
 
   &__price {
     font-weight: 600;
     margin-bottom: 1rem;
+    cursor: pointer;
   }
 
   &__actions {
     display: flex;
     gap: 0.5rem;
     align-items: center;
+    cursor: pointer;
   }
 
   &__quantity {
