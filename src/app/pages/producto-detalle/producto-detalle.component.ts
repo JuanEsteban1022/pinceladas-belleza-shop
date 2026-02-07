@@ -27,6 +27,7 @@ export class ProductoDetalleComponent implements OnInit {
     if (id) {
       this.productosService.getById(Number(id)).subscribe({
         next: (producto: Producto) => {
+          producto.descripcion = producto.descripcion.replace(/\n/g, '<br>');
           this.producto = producto;
           this.loading = false;
         },

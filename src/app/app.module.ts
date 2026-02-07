@@ -26,6 +26,7 @@ import { HeroCarouselComponent } from './pages/hero-carousel-component/hero-caro
 import { BrandCarouselComponent } from './pages/brand-carousel/brand-carousel.component';
 import { ProductoDetalleComponent } from './pages/producto-detalle/producto-detalle.component';
 import { TarjetaRegaloComponent } from './pages/tarjeta-regalo/tarjeta-regalo.component';
+import { SafeHtmlPipe } from './shared/pipes/safe-html.pipe';
 
 registerLocaleData(localeEsCo);
 @NgModule({
@@ -40,6 +41,7 @@ registerLocaleData(localeEsCo);
     NosotrosComponent,
     ProductoDetalleComponent,
     ProductosComponent,
+    SafeHtmlPipe,
     SkinTestFormComponent,
     TarjetaRegaloComponent
   ],

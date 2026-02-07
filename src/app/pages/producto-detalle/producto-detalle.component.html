@@ -13,7 +13,7 @@
 
         <div class="producto-detalle__info">
             <h1 class="producto-detalle__name">{{ producto.nombre }}</h1>
-            <p class="producto-detalle__description">{{ producto.descripcion }}</p>
+            <div class="producto-detalle__description" [innerHTML]="producto.descripcion | safeHtml"></div>
             <p class="producto-detalle__price">
                 {{ producto.precio | currency:'COP':'symbol':'1.0-0' }}
             </p>
