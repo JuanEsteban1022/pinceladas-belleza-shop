@@ -24,6 +24,9 @@
       </div>
 
       <div class="carrito__summary">
+        <button data-bold-button data-api-key="pmX4VLWctK_PoCq2NOMNXrWH233qSgOTrf_eGP_Y1LI"
+          data-description="Pago a traves de Embedded Checkout"
+          data-redirection-url="https://micomercio.com/pagos/resultado" data-render-mode="embedded"></button>
         <p>Total: {{ totalPrice$ | async | currency:'COP':'symbol':'1.0-0' }}</p>
         <button class="carrito__clear" (click)="clear()">Vaciar carrito</button>
       </div>
