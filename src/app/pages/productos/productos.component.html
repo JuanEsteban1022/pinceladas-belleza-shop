@@ -1,7 +1,10 @@
 <section class="page productos">
   <h2 class="page__title">Productos</h2>
 
-  <p *ngIf="loading">Cargando productos...</p>
+  <div *ngIf="loading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p class="loading-text">Cargando productos...</p>
+  </div>
   <p *ngIf="error" class="page__error">{{ error }}</p>
 
   <p class="page__subtitle" *ngIf="!loading && !error && productos.length === 0">
@@ -11,7 +14,7 @@
   <div class="productos__grid" *ngIf="!loading && !error && productos.length > 0">
     <article class="producto-card" *ngFor="let p of productos" [routerLink]="['/producto', p.id]">
       <div class="producto-card__image">
-        <img [src]="getImageUrl(p)" [alt]="p.nombre">
+        <img [src]="p.urlDrive ? p.urlDrive.split(',')[0].trim() : 'assets/img_no_found.png'" [alt]="p.nombre">
       </div>
       <h3 class="producto-card__name">{{ p.nombre }}</h3>
       <!-- <p class="producto-card__description">{{ p.descripcion }}</p> -->

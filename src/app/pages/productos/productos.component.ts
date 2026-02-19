@@ -23,8 +23,8 @@ export class ProductosComponent implements OnInit {
     this.error = null;
 
     this.productosService.getAll().subscribe({
-      next: (data) => {
-        this.productos = data.map(p => ({ ...p, cantidad: 1 }));
+      next: (response) => {
+        this.productos = response.items.map(p => ({ ...p, cantidad: 1 }));
         this.loading = false;
       },
       error: () => {
@@ -39,11 +39,25 @@ export class ProductosComponent implements OnInit {
       return 'assets/img_no_found.png';
     }
 
-    // Usar el mismo método que funcionaba en React
-    let match = p.urlDrive.match(/\/d\/([a-zA-Z0-9_-]+)/);
-    if (!match) match = p.urlDrive.match(/id=([a-zA-Z0-9_-]+)/);
+    // Si hay varias URLs separadas por coma, usa la primera
+    const firstUrl = p.urlDrive.split(',')[0].trim();
 
-    return match?.[1] ? `https://lh3.googleusercontent.com/d/${match[1]}` : 'assets/img_no_found.png';
+    if (!firstUrl) {
+      return 'assets/img_no_found.png';
+    }
+
+    // Si ya es una URL directa de Google (googleusercontent), retornarla tal cual
+    if (firstUrl.includes('googleusercontent.com')) {
+      return firstUrl;
+    }
+
+    // Si es un link de Google Drive clásico, convertirlo a enlace directo
+    let match = firstUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
+    if (!match) match = firstUrl.match(/id=([a-zA-Z0-9_-]+)/);
+
+    return match?.[1]
+      ? `https://lh3.googleusercontent.com/d/${match[1]}`
+      : firstUrl || 'assets/img_no_found.png';
   }
 
   // getImageUrl(p: Producto): string {

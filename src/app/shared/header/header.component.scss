@@ -2,7 +2,8 @@
     align-items: center;
     background-color: white;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    min-height: 80px;
+    min-height: 40px;
+
     position: sticky;
     top: 0;
     margin: 0 auto;
@@ -20,8 +21,9 @@
         }
 
         a {
-            margin-left: 1.5rem;
-            margin-top: 1.5rem;
+            margin-left: 1.25rem;
+            margin-top: 0.75rem;
+
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.06em;
@@ -168,16 +170,18 @@
 }
 
 .header__logo {
+    max-height: 4rem;
     display: flex;
     align-items: center;
     padding: 0 2rem;
+
     justify-content: space-between;
 
     .title {
         margin-left: 12px;
         color: #3a2a24;
         font-family: 'Great Vibes', cursive;
-        font-size: 3rem;
+        font-size: 2.3rem;
     }
 }
 
@@ -188,9 +192,10 @@ $btn-cloud-text: #fff;
 .btn-cloud {
     background: $btn-cloud-bg;
     color: $btn-cloud-text;
-    font-size: 1.2rem;
-    font-weight: bold;
-    padding: 0.8rem 2rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 0.55rem 1.6rem;
+
     border: none;
     border-radius: 50px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
@@ -215,8 +220,9 @@ $btn-cloud-text: #fff;
 }
 
 .logo-redondo {
-    width: 80px;
-    height: 80px;
+    width: 56px;
+    height: 56px;
+
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid #00000022;
@@ -228,4 +234,8 @@ $btn-cloud-text: #fff;
     justify-content: space-between;
     cursor: pointer;
     text-decoration: none;
+}
+
+.header__nav-container {
+    max-height: 4.3rem;
 }

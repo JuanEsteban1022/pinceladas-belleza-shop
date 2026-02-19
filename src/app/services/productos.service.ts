@@ -13,6 +13,17 @@ export interface Producto {
   proveedorId: number;
   urlDrive?: string;
   imagenes?: string[];
+  beneficios?: string | null;
+}
+
+export interface PaginatedProductosResponse {
+  items: Producto[];
+  total: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+  hasNext: boolean;
+  hasPrevious: boolean;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -20,8 +31,8 @@ export class ProductosService {
   private readonly BASE_URL = environment.API_URL;
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Producto[]> {
-    return this.http.get<Producto[]>(`${this.BASE_URL}/productos`);
+  getAll(): Observable<PaginatedProductosResponse> {
+    return this.http.get<PaginatedProductosResponse>(`${this.BASE_URL}/productos`);
   }
 
   getById(id: number): Observable<Producto> {
