@@ -10,34 +10,36 @@ export class BrandCarouselComponent {
 
   slides = [
     {
+      img: "/assets/brands/logo_atenea_pinceladas.webp",
+      title: "ATENEA",
+      viewInfo: true
+    },
+    {
+      img: "/assets/brands/logo_montoc_pinceladas.webp",
+      title: "MONTOC",
+      viewInfo: true
+    },
+    {
+      img: "/assets/brands/logo_purpure_pinceladas.avif",
+      title: "PURPURE",
+      viewInfo: true
+    },
+    {
       img: "/assets/brands/LOGO-GIRLY-NUEVO-BLANCO.png",
-      title: "PINCELADAS DE BELLEZA",
-      subtitle: "Glow with Elegance",
+      title: "GIRLY",
       viewInfo: true
-    },
-    {
-      img: "/assets/carrusel2.jpeg",
-      title: "PINCELADAS DE BELLEZA",
-      subtitle: "Glow with Elegance",
-      viewInfo: true
-    },
-    {
-      img: "/assets/carrusel3.png",
-      title: "PINCELADAS DE BELLEZA",
-      subtitle: "Glow with Elegance",
-      viewInfo: false
     }
   ];
 
   responsiveOptions = [
     {
       breakpoint: '1024px',
-      numVisible: 1,
+      numVisible: 4,
       numScroll: 1
     },
     {
       breakpoint: '768px',
-      numVisible: 1,
+      numVisible: 2,
       numScroll: 1
     },
     {

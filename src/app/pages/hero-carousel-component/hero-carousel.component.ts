@@ -17,7 +17,7 @@ export class HeroCarouselComponent {
       viewInfo: true
     },
     {
-      img: "/assets/carrusel2.jpeg",
+      img: "/assets/carrusel2.png",
       title: "PINCELADAS DE BELLEZA",
       subtitle: "Glow with Elegance",
       viewInfo: true

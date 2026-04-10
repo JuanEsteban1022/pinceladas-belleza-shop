@@ -1,34 +1,107 @@
 <section class="page carrito">
-  <h2 class="page__title">Carrito de compra</h2>
+  <h2 class="page__title">Carrito de compras</h2>
 
   <div *ngIf="cart$ | async as cart">
-    <p *ngIf="cart.length === 0" class="page__subtitle">
-      Tu carrito está vacío.
-    </p>
-
-    <div *ngIf="cart.length > 0">
-      <div class="carrito__items">
-        <article class="carrito-card" *ngFor="let item of cart">
-          <div class="carrito-card__image">
-            <img [src]="getImageUrl(item)" [alt]="item.nombre">
-          </div>
-          <div class="carrito-card__info">
-            <h3 class="carrito-card__name">{{ item.nombre }}</h3>
-            <p class="carrito-card__description">{{ item.descripcion }}</p>
-            <p class="carrito-card__price">
-              {{ item.precio | currency:'COP':'symbol':'1.0-0' }} × {{ item.quantity }}
-            </p>
-          </div>
-          <button class="carrito-card__remove" (click)="remove(item.id)">Eliminar</button>
-        </article>
+    <div *ngIf="cart.length === 0"
+      style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4rem 2rem; text-align: center; background-color: #fff; border-radius: 16px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06); margin-top: 2rem; background: #F9ECED;">
+      <div
+        style="width: 120px; height: 120px; background-color: #f8f5f4; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#3a2a24" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
       </div>
 
-      <div class="carrito__summary">
-        <button data-bold-button data-api-key="pmX4VLWctK_PoCq2NOMNXrWH233qSgOTrf_eGP_Y1LI"
-          data-description="Pago a traves de Embedded Checkout"
-          data-redirection-url="https://micomercio.com/pagos/resultado" data-render-mode="embedded"></button>
-        <p>Total: {{ totalPrice$ | async | currency:'COP':'symbol':'1.0-0' }}</p>
-        <button class="carrito__clear" (click)="clear()">Vaciar carrito</button>
+      <h3 style="margin: 0 0 1rem 0; font-size: 1.8rem; font-weight: 600; color: #3a2a24;">Tu carrito está vacío</h3>
+      <p style="margin: 0 0 2rem 0; font-size: 1.1rem; color: #6a5b54; max-width: 400px; line-height: 1.6;">
+        Parece que aún no has añadido productos a tu carrito. ¡Explora nuestros productos y encuentra algo que te
+        encante!
+      </p>
+
+      <button (click)="irAProductos()"
+        style="background-color: #3a2a24; color: #fff; border: none; padding: 1rem 2rem; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem; transition: background-color 0.15s ease; text-decoration: none; display: inline-block;">
+        Explorar productos
+      </button>
+    </div>
+
+    <div *ngIf="cart.length > 0" style="display: flex; flex-direction: row; gap: 1.5rem; margin-top: 1.5rem;">
+      <!-- Tabla de productos -->
+      <div
+        style="background-color: #fff; border-radius: 16px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06); overflow: hidden; width: stretch;">
+        <!-- Encabezados de tabla -->
+        <div
+          style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 80px; gap: 1rem; padding: 1rem 1.5rem; background-color: #f8f5f4; border-bottom: 1px solid #eee; font-weight: 600; color: #6a5b54; font-size: 0.9rem;">
+          <div style="font-weight: 600; font-size: large;">Producto</div>
+          <div style="font-weight: 600; font-size: large;">Precio</div>
+          <div style="font-weight: 600; font-size: large;">Cantidad</div>
+          <div style="font-weight: 600; font-size: large;">Subtotal</div>
+          <div style="font-weight: 600; font-size: large;"></div>
+        </div>
+
+        <!-- Items del carrito -->
+        <div *ngFor="let item of cart"
+          style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 80px; gap: 1rem; padding: 1rem 1.5rem; border-bottom: 1px solid #eee; align-items: center;">
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <img [src]="getImageUrl(item)" [alt]="item.nombre"
+              style="width: 70px; height: 70px; object-fit: cover; border-radius: 8px; flex-shrink: 0;">
+            <span style="font-weight: 600; color: #3a2a24; font-size: 1rem;">{{ item.nombre }}</span>
+          </div>
+          <div style="font-weight: 600; color: #3a2a24; font-size: 0.95rem;">{{ item.precio |
+            currency:'COP':'symbol':'1.0-0' }}</div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <button (click)="updateQuantity(item.id, item.quantity - 1)" [disabled]="item.quantity <= 1"
+              style="width: 28px; height: 28px; border: 1px solid #ddd; background: #fff; border-radius: 6px; cursor: pointer; font-weight: 600; color: #3a2a24; display: flex; align-items: center; justify-content: center;">-</button>
+            <span style="min-width: 30px; text-align: center; font-weight: 600; font-size: 0.95rem;">{{ item.quantity
+              }}</span>
+            <button (click)="updateQuantity(item.id, item.quantity + 1)"
+              style="width: 28px; height: 28px; border: 1px solid #ddd; background: #fff; border-radius: 6px; cursor: pointer; font-weight: 600; color: #3a2a24; display: flex; align-items: center; justify-content: center;">+</button>
+          </div>
+          <div style="font-weight: 600; color: #3a2a24; font-size: 0.95rem;">{{ (item.precio * item.quantity) |
+            currency:'COP':'symbol':'1.0-0' }}</div>
+          <div style="display: flex; justify-content: center;">
+            <button (click)="remove(item.id)"
+              style="background: none; border: none; color: #b3261e; cursor: pointer; font-size: 0.85rem; padding: 0.4rem 0.8rem; border-radius: 6px;">Eliminar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resumen al lado derecho -->
+      <div style="display: flex; justify-content: flex-end; align-items: flex-start; padding: 0 1rem;">
+        <div
+          style="background-color: #fff; border-radius: 16px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06); padding: 1.5rem; min-width: 388px;">
+          <h3 style="margin: 0 0 1.5rem 0; font-size: 2.2rem; font-weight: 600; color: #3a2a24; text-align: center;">
+            Resumen del pedido</h3>
+          <div
+            style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid #eee;">
+            <span style="font-weight: 400; font-size: 1rem; color: #6a5b54;">Subtotal</span>
+            <span style="font-weight: 400; font-size: 1.2rem; color: #3a2a24;">{{ subtotal$ | async |
+              currency:'COP':'symbol':'1.0-0' }}</span>
+          </div>
+          <div
+            style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid #eee;">
+            <span style="font-weight: 400; font-size: 1rem; color: #6a5b54;">Envío</span>
+            <span style="font-weight: 400; font-size: 1.2rem; color: #3a2a24;">{{ valorEnvio |
+              currency:'COP':'symbol':'1.0-0' }}</span>
+          </div>
+          <div
+            style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid #eee;">
+            <span style="font-weight: 600; font-size: 2rem; color: #6a5b54;">Total</span>
+            <span style="font-weight: 600; font-size: 2rem; color: #3a2a24;">{{ totalPrice$ | async |
+              currency:'COP':'symbol':'1.0-0' }}</span>
+          </div>
+          <ng-container *ngIf="totalPrice$ | async as total">
+            <button class="carrito__pay" (click)="prepararPago(total)"
+              style="margin-top: 2rem; background-color: #3a2a24; color: #fff; border: none; padding: 0.8rem 2rem; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem; transition: background-color 0.15s ease; width: 100%; margin-bottom: 1rem;">
+              Pagar
+              Ahora</button>
+          </ng-container>
+
+          <button class="carrito__clear" (click)="clear()"
+            style="background-color: transparent; color: #6a5b54; border: 2px solid #6a5b54; padding: 0.6rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.15s ease; width: 100%; margin-bottom: 1rem;">Limpiar
+            carrito</button>
+        </div>
       </div>
     </div>
   </div>

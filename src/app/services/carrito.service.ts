@@ -64,6 +64,16 @@ export class CarritoService {
     this.updateTotalItems();
   }
 
+  updateQuantity(id: number, quantity: number): void {
+    const current = this.cart.value;
+    const item = current.find(item => item.id === id);
+    if (item) {
+      item.quantity = quantity;
+      this.cart.next([...current]);
+      this.updateTotalItems();
+    }
+  }
+
   clear(): void {
     this.cart.next([]);
     this.updateTotalItems();

@@ -42,14 +42,14 @@ export class ProductoDetalleComponent implements OnInit {
   getImagenes(): string[] {
     if (!this.producto) return [];
 
-    // Si hay imágenes en el array, usarlas
+    // Si hay imágenes en el array, usarlas directamente
     if (this.producto.imagenes && this.producto.imagenes.length > 0) {
-      return this.producto.imagenes.map(img => this.procesarUrlImagen(img));
+      return this.producto.imagenes;
     }
 
     // Si no hay array de imágenes pero hay urlDrive, procesar urlDrive
     if (this.producto.urlDrive) {
-      return this.producto.urlDrive.split(',').map(url => this.procesarUrlImagen(url.trim()));
+      return this.producto.urlDrive.split(',').map(url => url.trim());
     }
 
     // Si no hay imágenes ni urlDrive, devolver imagen por defecto
@@ -59,16 +59,13 @@ export class ProductoDetalleComponent implements OnInit {
   procesarUrlImagen(url: string): string {
     if (!url) return 'assets/img_no_found.png';
 
-    // Si ya es una URL directa de Google Drive, retornarla
-    if (url.includes('googleusercontent.com')) {
+    // Las URLs de Cloudinary ya son directas, retornarlas tal cual
+    if (url.includes('cloudinary.com')) {
       return url;
     }
 
-    // Procesar URL de Google Drive
-    let match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
-    if (!match) match = url.match(/id=([a-zA-Z0-9_-]+)/);
-
-    return match?.[1] ? `https://lh3.googleusercontent.com/d/${match[1]}` : 'assets/img_no_found.png';
+    // Para cualquier otro caso, retornar la URL tal cual
+    return url;
   }
 
   addToCart(producto: Producto): void {

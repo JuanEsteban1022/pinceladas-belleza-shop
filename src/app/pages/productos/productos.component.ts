@@ -9,13 +9,21 @@ import { CarritoService } from 'src/app/services/carrito.service';
 })
 export class ProductosComponent implements OnInit {
   productos: (Producto & { cantidad: number })[] = [];
+  productosFiltrados: (Producto & { cantidad: number })[] = [];
+  categorias: any[] = [];
+  categoriaSeleccionada: number | null = null;
+  terminoBusqueda: string = '';
   loading = false;
   error: string | null = null;
 
-  constructor(private productosService: ProductosService, private cartService: CarritoService) { }
+  constructor(
+    private productosService: ProductosService,
+    private cartService: CarritoService
+  ) { }
 
   ngOnInit(): void {
     this.cargarProductos();
+    this.cargarCategorias();
   }
 
   private cargarProductos(): void {
@@ -25,6 +33,7 @@ export class ProductosComponent implements OnInit {
     this.productosService.getAll().subscribe({
       next: (response) => {
         this.productos = response.items.map(p => ({ ...p, cantidad: 1 }));
+        this.filtrarProductos();
         this.loading = false;
       },
       error: () => {
@@ -32,6 +41,70 @@ export class ProductosComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  private cargarCategorias(): void {
+    this.productosService.getAllCategorias().subscribe({
+      next: (response) => {
+
+        if (response && response.items) {
+          this.categorias = response.items;
+        } else if (Array.isArray(response)) {
+          this.categorias = response;
+        } else {
+          this.categorias = [
+            { id: 1, nombre: 'Cuidado corporal' },
+            { id: 2, nombre: 'Skincare coreano' },
+            { id: 3, nombre: 'Maquillaje' },
+            { id: 4, nombre: 'Accesorios' },
+            { id: 5, nombre: 'Cuidado Facial' },
+            { id: 6, nombre: 'Obsequio' }
+          ];
+        }
+      },
+      error: (error) => {
+        this.categorias = [
+          { id: 1, nombre: 'Cuidado corporal' },
+          { id: 2, nombre: 'Skincare coreano' },
+          { id: 3, nombre: 'Maquillaje' },
+          { id: 4, nombre: 'Accesorios' },
+          { id: 5, nombre: 'Cuidado Facial' },
+          { id: 6, nombre: 'Obsequio' }
+        ];
+      }
+    });
+  }
+
+  filtrarProductos(): void {
+    let productosFiltrados = [...this.productos];
+
+    // Filtrar por categoría
+    if (this.categoriaSeleccionada !== null) {
+      productosFiltrados = productosFiltrados.filter(
+        producto => producto.categoriaId === this.categoriaSeleccionada
+      );
+    }
+
+    // Filtrar por término de búsqueda
+    if (this.terminoBusqueda.trim() !== '') {
+      const termino = this.terminoBusqueda.toLowerCase().trim();
+      productosFiltrados = productosFiltrados.filter(
+        producto => producto.nombre.toLowerCase().includes(termino)
+      );
+    }
+
+    this.productosFiltrados = productosFiltrados;
+  }
+
+  seleccionarCategoria(categoriaId: number | null): void {
+    this.categoriaSeleccionada = categoriaId;
+    this.filtrarProductos();
+  }
+
+  onCategoriaChange(event: Event): void {
+    const target = event.target as HTMLSelectElement;
+    const value = target.value;
+    this.seleccionarCategoria(value ? parseInt(value, 10) : null);
   }
 
   getImageUrl(p: Producto): string {

@@ -19,64 +19,127 @@
 .carrito__items {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0;
   margin-top: 1.5rem;
-}
-
-.carrito-card {
   background-color: #fff;
   border-radius: 16px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
-  padding: 1.25rem;
-  display: flex;
+  overflow: hidden;
+}
+
+.carrito__headers {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 80px;
   gap: 1rem;
+  padding: 1rem 1.5rem;
+  background-color: #f8f5f4;
+  border-bottom: 1px solid #eee;
+  font-weight: 600;
+  color: #6a5b54;
+  font-size: 0.9rem;
+}
+
+.carrito__item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 80px;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #eee;
   align-items: center;
+}
 
-  &__image {
-    flex-shrink: 0;
+.carrito__item:last-child {
+  border-bottom: none;
+}
 
-    img {
-      width: 80px;
-      height: 80px;
-      object-fit: cover;
-      border-radius: 12px;
-    }
+.carrito__producto {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.carrito__imagen {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.carrito__nombre {
+  font-weight: 600;
+  color: #3a2a24;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.carrito__precio {
+  font-weight: 600;
+  color: #3a2a24;
+  font-size: 0.95rem;
+}
+
+.carrito__cantidad {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.carrito__cantidad-btn {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #3a2a24;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover:not(:disabled) {
+    background-color: #f8f5f4;
+    border-color: #b07a68;
   }
 
-  &__info {
-    flex: 1;
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
+}
 
-  &__name {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin: 0 0 0.25rem 0;
-  }
+.carrito__cantidad-numero {
+  min-width: 30px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
 
-  &__description {
-    font-size: 0.9rem;
-    color: #6a5b54;
-    margin-bottom: 0.5rem;
-  }
+.carrito__subtotal {
+  font-weight: 600;
+  color: #b07a68;
+  font-size: 0.95rem;
+}
 
-  &__price {
-    font-weight: 600;
-    margin: 0;
-  }
+.carrito__acciones {
+  display: flex;
+  justify-content: center;
+}
 
-  &__remove {
-    background: none;
-    border: none;
-    color: #b3261e;
-    cursor: pointer;
-    font-size: 0.9rem;
-    padding: 0.4rem 0.8rem;
-    border-radius: 8px;
-    transition: background-color 0.15s ease;
+.carrito__eliminar {
+  background: none;
+  border: none;
+  color: #b3261e;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  transition: background-color 0.15s ease;
 
-    &:hover {
-      background-color: rgba(179, 38, 30, 0.08);
-    }
+  &:hover {
+    background-color: rgba(179, 38, 30, 0.08);
   }
 }
 
@@ -90,6 +153,23 @@
     font-weight: 600;
     font-size: 1.1rem;
     margin-bottom: 0.75rem;
+  }
+}
+
+.carrito__pay {
+  background-color: #b07a68;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: background-color 0.15s ease;
+  margin-bottom: 0.75rem;
+
+  &:hover {
+    background-color: #8f6153;
   }
 }
 

@@ -50,4 +50,12 @@ export class ProductosService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.BASE_URL}/productos/${id}`);
   }
+
+  getByCategoria(categoriaId: number): Observable<PaginatedProductosResponse> {
+    return this.http.get<PaginatedProductosResponse>(`${this.BASE_URL}/productos?categoriaId=${categoriaId}`);
+  }
+
+  getAllCategorias(): Observable<any> {
+    return this.http.get<any>(`${this.BASE_URL}/category`);
+  }
 }
