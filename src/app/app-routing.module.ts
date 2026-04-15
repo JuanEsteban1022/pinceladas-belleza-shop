@@ -7,6 +7,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { NosotrosComponent } from './pages/nosotros/nosotros.component';
 import { ProductoDetalleComponent } from './pages/producto-detalle/producto-detalle.component';
 import { TarjetaRegaloComponent } from './pages/tarjeta-regalo/tarjeta-regalo.component';
+import { ResultadoTransaccionComponent } from './pages/resultado-transaccion/resultado-transaccion.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'nosotros', component: NosotrosComponent },
   { path: 'tarjeta-regalo', component: TarjetaRegaloComponent },
+  { path: 'pagos/resultado', component: ResultadoTransaccionComponent },
   { path: '**', redirectTo: '' }
 ];
 

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { CarritoService, CartItem } from '../../services/carrito.service';
 import { environment } from '../../../env/enviroment';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-carrito',
@@ -20,36 +21,48 @@ export class CarritoComponent {
   valorEnvio: number = 9000;
 
   boldApiKey = environment.BOLD_API_KEY;
+  boldSecretKey = environment.BOLD_SECRET_KEY;
   boldCurrency = 'COP';
   boldRedirectionUrl = `${location.origin}/pagos/resultado`;
   boldDescription = 'Compra Pinceladas de Belleza';
 
-  boldOrderId: string | null = null;
-  boldAmount: number | null = null;
-  boldIntegritySignature: string | null = 'pmX4VLWctK_PoCq2NOMNXrWH233qSgOTrf_eGP_Y1LI';
+  boldOrderId: string = '';
+  boldAmount: number = 0;
+  boldIntegritySignature: string = '';
 
   constructor(
     private cartService: CarritoService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   prepararPago(total: number | null | undefined): void {
     if (!total || total <= 0) return;
 
     this.boldAmount = Math.round(total);
-
-    // Placeholder: esto debe venir de tu backend (orden real + firma SHA256).
-    // Lo dejamos aquí para que el botón quede implementado y tú conectes el backend después.
     this.boldOrderId = `ORD-${Date.now()}`;
-    this.boldIntegritySignature = 'pmX4VLWctK_PoCq2NOMNXrWH233qSgOTrf_eGP_Y1LI';
+
+    // Guardar monto y productos para la página de resultado (Bold no siempre envía amount)
+    sessionStorage.setItem('bold_amount', String(this.boldAmount));
+    this.cartService.getCart().subscribe(items => {
+      sessionStorage.setItem('bold_cart_items', JSON.stringify(items));
+    });
+
+    this.boldIntegritySignature = CryptoJS.SHA256(
+      this.boldOrderId +
+      this.boldAmount +
+      this.boldCurrency +
+      this.boldSecretKey
+    ).toString();
 
     this.openEmbeddedBoldCheckout();
   }
 
   private openEmbeddedBoldCheckout(): void {
     if (!this.boldAmount || !this.boldOrderId) return;
+
     if (!this.boldIntegritySignature) {
-      console.error('[Bold] Falta integritySignature. Debe venir desde tu backend.');
+      console.error('[Bold] Falta integritySignature.');
       return;
     }
 
@@ -64,7 +77,7 @@ export class CarritoComponent {
         currency: this.boldCurrency,
         amount: String(this.boldAmount),
         apiKey: this.boldApiKey,
-        integritySignature: this.boldIntegritySignature,
+        integritySignature: this.boldIntegritySignature, // ✅ USAR LA CORRECTA
         description: this.boldDescription,
         redirectionUrl: this.boldRedirectionUrl,
         renderMode: 'embedded'
@@ -110,14 +123,11 @@ export class CarritoComponent {
       return 'assets/logo-pinceladas.png';
     }
 
-    // Si es URL de Cloudinary, retornarla directamente
     if (item.urlDrive.includes('cloudinary.com')) {
-      // Si hay múltiples imágenes separadas por comas, tomar la primera
       const urls = item.urlDrive.split(',');
       return urls[0].trim();
     }
 
-    // Para cualquier otro caso, retornar la URL tal cual
     return item.urlDrive;
   }
 }

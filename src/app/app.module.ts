@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +27,7 @@ import { BrandCarouselComponent } from './pages/brand-carousel/brand-carousel.co
 import { ProductoDetalleComponent } from './pages/producto-detalle/producto-detalle.component';
 import { TarjetaRegaloComponent } from './pages/tarjeta-regalo/tarjeta-regalo.component';
 import { SafeHtmlPipe } from './shared/pipes/safe-html.pipe';
+import { ResultadoTransaccionComponent } from './pages/resultado-transaccion/resultado-transaccion.component';
 
 registerLocaleData(localeEsCo);
 @NgModule({
@@ -43,7 +44,8 @@ registerLocaleData(localeEsCo);
     ProductosComponent,
     SafeHtmlPipe,
     SkinTestFormComponent,
-    TarjetaRegaloComponent
+    TarjetaRegaloComponent,
+    ResultadoTransaccionComponent
   ],
   imports: [
     AppRoutingModule,
@@ -65,7 +67,8 @@ registerLocaleData(localeEsCo);
       useClass: AuthInterceptor,
       multi: true
     },
-    { provide: LOCALE_ID, useValue: 'es-CO' }
+    { provide: LOCALE_ID, useValue: 'es-CO' },
+    CurrencyPipe
   ],
   bootstrap: [AppComponent]
 })

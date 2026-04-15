@@ -1,0 +1,75 @@
+<section class="page resultado">
+    <div class="resultado__container">
+        <div *ngIf="loading" class="resultado__loading">
+            <p>Cargando resultado...</p>
+        </div>
+
+        <div *ngIf="!loading && result" class="resultado__card">
+            <div class="resultado__icon" [style.color]="statusColor">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" [attr.stroke]="statusColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="16 8 12 12 8 8" *ngIf="result.status === 'approved'"></polyline>
+                    <line x1="18" y1="6" x2="6" y2="18"
+                        *ngIf="result.status === 'rejected' || result.status === 'cancelled'"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"
+                        *ngIf="result.status === 'rejected' || result.status === 'cancelled'"></line>
+                </svg>
+            </div>
+
+            <h2 class="resultado__title" [style.color]="statusColor">{{ statusText }}</h2>
+
+            <div class="resultado__details">
+                <div class="resultado__row">
+                    <span class="resultado__label">Orden:</span>
+                    <span class="resultado__value">{{ result.orderId }}</span>
+                </div>
+                <div class="resultado__row">
+                    <span class="resultado__label">Monto:</span>
+                    <span class="resultado__value">{{ result.amount | currency:'COP':'symbol':'1.0-0' }}</span>
+                </div>
+                <div class="resultado__row">
+                    <span class="resultado__label">ID de transacción:</span>
+                    <span class="resultado__value">{{ result.transactionId || 'No disponible' }}</span>
+                </div>
+                <div class="resultado__row">
+                    <span class="resultado__label">Estado:</span>
+                    <span class="resultado__value" [style.color]="statusColor">{{ result.status.toUpperCase() }}</span>
+                </div>
+            </div>
+
+            <!-- Resumen de productos comprados -->
+            <div class="resultado__products-section" *ngIf="cartItems.length > 0">
+                <button class="resultado__products-toggle" (click)="toggleProducts()">
+                    <span>Resumen de productos</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" [class.rotated]="showProducts">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+
+                <div class="resultado__products" *ngIf="showProducts">
+                    <div class="resultado__product" *ngFor="let item of cartItems">
+                        <div class="resultado__product-info">
+                            <span class="resultado__product-name">{{ item.nombre }}</span>
+                            <span class="resultado__product-quantity">x{{ item.quantity }}</span>
+                        </div>
+                        <span class="resultado__product-price">{{ item.precio * item.quantity |
+                            currency:'COP':'symbol':'1.0-0' }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resultado__actions">
+                <button class="resultado__btn" (click)="volver()">
+                    Volver a la tienda
+                </button>
+            </div>
+        </div>
+
+        <div *ngIf="!loading && !result" class="resultado__error">
+            <h3>No se pudo obtener el resultado de la transacción</h3>
+            <button class="resultado__btn" (click)="volver()">Volver a la tienda</button>
+        </div>
+    </div>
+</section>
